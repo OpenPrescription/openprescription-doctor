@@ -42,5 +42,7 @@ export default {
   signPrescriptionTitle: 'Assinatura Digital',
   signPrescriptionDescription: 'Agora abra o app OriginalMy e escaneie o QR-Code com o seu Blockchain ID para validar sua identidade e assinar digitalmente',
   scanQrcodeDescription: 'Use o Blockchain ID e aponte seu celular para esta tela',
+  dialogReqMedIdDescription: 'Preencha o campo abaixo com seu CRM. Ele é necessário para validar suas credenciais junto ao CFM',
+  fieldRequired: 'Campo obrigatório',
   
 };
