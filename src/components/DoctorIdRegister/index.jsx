@@ -38,9 +38,9 @@ export default ({ open, onCancel, onValidate }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <Trans>
+            <Trans i18nKey="dialogReqMedIdDescription">
               Please, fill the field below with your Medical ID. We need it to
-              validade your sign up in regulatory organ.
+              validade your credentials with the regulatory body.
             </Trans>
           </DialogContentText>
           <TextField
@@ -57,7 +57,7 @@ export default ({ open, onCancel, onValidate }) => {
           />
           {errors.doctorId && (
             <FormHelperText error={true}>
-              <Trans>Field is required</Trans>
+              <Trans i18nKey="fieldRequired">Field is required</Trans>
             </FormHelperText>
           )}
         </DialogContent>
