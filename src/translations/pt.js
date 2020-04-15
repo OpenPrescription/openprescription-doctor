@@ -44,5 +44,7 @@ export default {
   scanQrcodeDescription: 'Use o Blockchain ID e aponte seu celular para esta tela',
   dialogReqMedIdDescription: 'Preencha o campo abaixo com seu CRM. Ele é necessário para validar suas credenciais junto ao CFM',
   fieldRequired: 'Campo obrigatório',
-  doctorInvalidErrorMessage: 'Não conseguimos validar seu CRM, por favor entre em support+op@originalmy.com.'
+  doctorInvalidErrorMessage: 'Não conseguimos validar seu CRM, por favor entre em support+op@originalmy.com.',
+  doctorFederalCode: 'UF',
+  justLettersAllowed: 'Use apenas letras'
 };

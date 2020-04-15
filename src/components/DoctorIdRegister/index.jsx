@@ -9,14 +9,15 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Trans, useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import { Grid } from "@material-ui/core";
 
 export default ({ open, onCancel, onSubmit }) => {
   const { t } = useTranslation();
   const { register, handleSubmit, watch, errors } = useForm();
 
-  const validateDoctorDoctorId = async ({ doctorId }) => {
+  const validateDoctorDoctorId = async ({ doctorId, doctorFederalCode }) => {
     if (typeof onSubmit === "function") {
-      onSubmit(doctorId);
+      onSubmit(doctorId, doctorFederalCode);
     }
   };
 
@@ -33,23 +34,55 @@ export default ({ open, onCancel, onSubmit }) => {
               validade your credentials with the regulatory body.
             </Trans>
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="doctorId"
-            name="doctorId"
-            label={t("doctorId")}
-            type="text"
-            fullWidth
-            inputRef={register({ required: true })}
-            error={Boolean(errors.doctorId)}
-            required
-          />
-          {errors.doctorId && (
-            <FormHelperText error={true}>
-              <Trans i18nKey="fieldRequired">Field is required</Trans>
-            </FormHelperText>
-          )}
+          <Grid container spacing={2}>
+            <Grid item md={9} xs={12}>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="doctorId"
+                name="doctorId"
+                label={t("doctorId")}
+                type="text"
+                fullWidth
+                inputRef={register({ required: true })}
+                error={Boolean(errors.doctorId)}
+                required
+              />
+              {errors.doctorId && (
+                <FormHelperText error={true}>
+                  <Trans i18nKey="fieldRequired">Field is required</Trans>
+                </FormHelperText>
+              )}
+            </Grid>
+            <Grid item md={3} xs={12}>
+              <TextField
+                margin="dense"
+                id="doctorFederalCode"
+                name="doctorFederalCode"
+                label={t("doctorFederalCode")}
+                type="text"
+                fullWidth
+                inputRef={register({ required: true, pattern: /\D/i })}
+                error={Boolean(errors.doctorFederalCode)}
+                required
+                inputProps={{
+                  maxLength: 2,
+                }}
+              />
+              {errors.doctorFederalCode &&
+                errors.doctorFederalCode.type === "required" && (
+                  <FormHelperText error={true}>
+                    <Trans i18nKey="fieldRequired">Field is required</Trans>
+                  </FormHelperText>
+                )}
+              {errors.doctorFederalCode &&
+                errors.doctorFederalCode.type === "pattern" && (
+                  <FormHelperText error={true}>
+                    <Trans i18nKey="justLettersAllowed">Use only letters</Trans>
+                  </FormHelperText>
+                )}
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={onCancel} color="primary">
