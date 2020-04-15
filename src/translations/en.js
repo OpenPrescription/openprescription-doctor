@@ -35,6 +35,6 @@ export default {
   homeScreenText: 'Everything securely authenticated and digitally signed using blockchain technology.',
   homeScreenButton: 'Start prescription',
   prescriptionSent: 'Thank you, the prescription was sent!',
-  prescriptionUploaded: 'Prescription ready to be signed. After signing and sending, it is not possible to re-send this file.',
+  prescriptionUploaded: 'Prescription ready to be signed.<br>After signing and sending, it is not possible to re-send this file.',
   validateIdentity: 'SUBMIT AND VALIDATE MY IDENTITY'
 };
