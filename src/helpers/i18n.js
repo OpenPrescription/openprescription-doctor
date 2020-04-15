@@ -33,6 +33,10 @@ i18n
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
+    fallbackLng: {
+      "pt-BR": ["pt"],
+      default: ["en"],
+    },
   });
 
 export default i18n;
