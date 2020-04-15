@@ -10,7 +10,10 @@ function AuthProvider(props) {
   const login = (data) => setUser(data); // make a login request
 
   const register = (userData) => {}; // register the user
-  const logout = () => setUser(null); // clear the token in localStorage and the user data
+  const logout = () => {
+    setUser(null);
+    localStorage.clear();
+  }; // clear the token in localStorage and the user data
 
   return (
     <AuthContext.Provider
