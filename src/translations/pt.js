@@ -35,7 +35,7 @@ export default {
   homeScreenText: 'Agora, seu paciente não precisa sair de casa para obter uma receita. Sua identidade autenticada com segurança pela blockchain.',
   homeScreenButton: 'Iniciar prescrição',
   prescriptionSent: 'Obrigado, sua prescrição foi enviada!',
-  prescriptionUploaded: 'Prescrição pronta para ser assinada digitalmente',
+  prescriptionUploaded: 'Prescrição pronta para ser assinada digitalmente.<br>Verifique a receita. Após a assinatura e envio, o mesmo arquivo não poderá ser reenviado.',
   validateIdentity: 'Assinar e enviar',
   companyIdRequired: 'CPNJ é obrigatório',
   companyNameRequired: 'Nome da instituição é obrigatório',
