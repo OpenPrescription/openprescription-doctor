@@ -28,7 +28,7 @@ export default {
   prescriptionSuccessMessage:
     "Prescription created with success. A e-mail was sent to patient with prescription document.",
   prescriptionUnkownErrorMessage:
-    "Could not create prescription. Please, try later.",
+    "Duplicate prescription or invalid. It is not possible to send the same prescription more than once. If you think there's an error, contact support+op@originalmy.com",
   companyName: "Company Name",
   companyId: "Company ID",
   homeScreenTitle: 'Send your medical prescriptions remotely.',
