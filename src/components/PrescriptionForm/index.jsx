@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default ({ onSubmit, uploadForm, onUploadPrescription, file, onClickPrescription }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const { register, handleSubmit, watch, errors } = useForm();
   const [selectExpiredDate, handleExpiredDateChange] = useState(new Date());
@@ -224,7 +224,7 @@ export default ({ onSubmit, uploadForm, onUploadPrescription, file, onClickPresc
                 minDate={new Date()}
               />
             </FormControl>
-            <FormControl component="fieldset" className={classes.formControl} style={{marginTop: '45px'}}>
+            {!i18n.language.match(/pt/) && (<FormControl component="fieldset" className={classes.formControl} >
               <FormControlLabel
                 control={
                   <Checkbox
@@ -246,7 +246,7 @@ export default ({ onSubmit, uploadForm, onUploadPrescription, file, onClickPresc
                 If checked, nobody can buy the medicines in behalf of the patient
                 </Trans>
               </FormHelperText>
-            </FormControl>
+            </FormControl>)}
             <FormControl component="fieldset" className={classes.formControl}>
               <Button type="submit" variant="contained" color="primary" style={{ width: '350px'}}>
                 <Trans i18nKey="submitButtonLabel">Next</Trans>
