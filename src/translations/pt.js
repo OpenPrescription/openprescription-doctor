@@ -28,7 +28,7 @@ export default {
   prescriptionSuccessMessage:
     "Receita criada com sucesso. Uma cópia foi enviado para o paciente por e-mail.",
   prescriptionUnkownErrorMessage:
-    "Não foi possível cadastrar a receita. Tente novamente mais tarde.",
+    "Receita duplicada ou inválida. Não é permitido enviar o mesmo documento mais de uma vez. Em caso de dúvida, contate o suporte: contato+op@originalmy.com",
   companyName: "Nome da empresa",
   companyId: "CNPJ",
   homeScreenTitle: 'Envie suas prescrições médicas remotamente.',
