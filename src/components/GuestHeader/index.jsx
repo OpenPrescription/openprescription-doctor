@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/Button"
 import { makeStyles } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { useTranslation } from "react-i18next";
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo_prescription-03.png';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -51,7 +51,7 @@ export default () => {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-          <img src={logo} />
+          <img src={logo} style={{ width: 200 }}/>
   
           <Button
             color="inherit"
