@@ -62,15 +62,25 @@ export default ({ open, onCancel, onSubmit }) => {
                 label={t("doctorFederalCode")}
                 type="text"
                 fullWidth
-                inputRef={register({ required: true })}
+                inputRef={register({ required: true, pattern: /\D/i })}
                 error={Boolean(errors.doctorFederalCode)}
                 required
+                inputProps={{
+                  maxLength: 2,
+                }}
               />
-              {errors.doctorFederalCode && (
-                <FormHelperText error={true}>
-                  <Trans i18nKey="fieldRequired">Field is required</Trans>
-                </FormHelperText>
-              )}
+              {errors.doctorFederalCode &&
+                errors.doctorFederalCode.type === "required" && (
+                  <FormHelperText error={true}>
+                    <Trans i18nKey="fieldRequired">Field is required</Trans>
+                  </FormHelperText>
+                )}
+              {errors.doctorFederalCode &&
+                errors.doctorFederalCode.type === "pattern" && (
+                  <FormHelperText error={true}>
+                    <Trans i18nKey="justLettersAllowed">Use only letters</Trans>
+                  </FormHelperText>
+                )}
             </Grid>
           </Grid>
         </DialogContent>
