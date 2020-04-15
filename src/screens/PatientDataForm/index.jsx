@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -14,9 +13,11 @@ import PrescriptionForm from "../../components/PrescriptionForm";
 import { createPrescription } from "../../data/prescriptions";
 import moment from "moment";
 import { useUser } from "../../contexts/User";
-import { toSha256, toBase64 } from "../../helpers";
+import { toBase64 } from "../../helpers";
 import sha256 from "js-sha256";
 import shippingPackage from "./../../assets/shipping-package.svg";
+import { validateDoctorId } from "../../data/doctors";
+import { setDoctorId } from "../../helpers/storage";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -37,34 +38,30 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginBottom: 40,
   },
+  alerts: {
+    marginBottom: 20
+  }
 }));
 
 export default () => {
   const classes = useStyles();
-  const { t } = useTranslation();
   const [loading, setLoading] = useState(null);
   const [openDoctorIdRequest, toggleDoctorIdRequest] = useState(false);
   const [startSignProcess, handleSignProcess] = useState(false);
   const [prescription, setPrescription] = useState(false);
   const [prescriptionFile, setPrescriptionFile] = useState(false);
-  const [validationError, setValidationError] = useState(null);
   const [creationResponse, setCreationResponse] = useState("");
-  
+
   const [uploadForm, setUploadForm] = useState(false);
   const user = useUser();
-  const history = useHistory();
 
-  const onValidateDoctorId = (isValid, doctorId) => {
-    if (isValid) {
-      setPrescription({
-        ...prescription,
-        doctorId: doctorId,
-      });
-      setUploadForm(true);
-      toggleDoctorIdRequest(false);
-    } else {
-      setValidationError(t("doctorIdvalidationError"));
-    }
+  const onValidateDoctorId = (doctorId) => {
+    setPrescription({
+      ...prescription,
+      doctorId,
+    });
+    setUploadForm(true);
+    toggleDoctorIdRequest(false);
   };
 
   const sendPrescription = async (data) => {
@@ -85,9 +82,20 @@ export default () => {
     }
   };
 
+  const validateDoctor = async (doctor) => {
+    return validateDoctorId(prescription.doctorId, doctor.name, doctor.country);
+  };
+
   const onPrescriptionSigned = async (doctor) => {
-    handleSignProcess(false);
     setLoading(true);
+    try {
+      await validateDoctor(doctor);
+      setDoctorId(prescription.doctorId);
+    } catch (err) {
+      setCreationResponse("doctor-invalid");
+      setLoading(false);
+      return;
+    }
     const data = {
       ...prescription,
       doctor: JSON.stringify(doctor),
@@ -96,6 +104,7 @@ export default () => {
       ),
     };
     await sendPrescription(data);
+    handleSignProcess(false);
     setLoading(false);
   };
 
@@ -137,6 +146,25 @@ export default () => {
   return (
     <div className={classes.heroContent}>
       <Container>
+        {loading && (
+          <Backdrop className={classes.backdrop} open={loading}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
+        {creationResponse == "error" && (
+          <Alert severity="error" className={classes.alerts}>
+            <Trans i18nKey="prescriptionUnkownErrorMessage">
+              Could not create prescription. Please, try later.
+            </Trans>
+          </Alert>
+        )}
+        {creationResponse == "doctor-invalid" && (
+          <Alert severity="error" className={classes.alerts}>
+            <Trans i18nKey="doctorInvalidErrorMessage">
+              We can validade doctor ID, please contact us.
+            </Trans>
+          </Alert>
+        )}
         {!startSignProcess && (
           <>
             {loading && (
@@ -147,10 +175,10 @@ export default () => {
             {creationResponse === "success" && (
               <div
                 style={{
-                  display: 'flex', 
-                  flexDirection: 'column',
-                  minHeight: '600px',
-                  justifyContent: 'center',
+                  display: "flex",
+                  flexDirection: "column",
+                  minHeight: "600px",
+                  justifyContent: "center",
                 }}
               >
                 <Typography
@@ -165,27 +193,19 @@ export default () => {
                 <img src={shippingPackage} />
               </div>
             )}
-            {creationResponse == "error" && (
-              <Alert severity="error">
-                <Trans i18nKey="prescriptionUnkownErrorMessage">
-                  Could not create prescription. Please, try later.
-                </Trans>
-              </Alert>
+            {creationResponse === "" && (
+              <PrescriptionForm
+                file={prescriptionFile}
+                onClickPrescription={onClickPrescription}
+                onSubmit={onSubmitPrescription}
+                uploadForm={uploadForm}
+                onUploadPrescription={onUploadPrescription}
+              />
             )}
-            {Boolean(validationError) && (
-              <Alert severity="error">{validationError}</Alert>
-            )}
-            {creationResponse === "" && (<PrescriptionForm
-              file={prescriptionFile}
-              onClickPrescription={onClickPrescription}
-              onSubmit={onSubmitPrescription}
-              uploadForm={uploadForm}
-              onUploadPrescription={onUploadPrescription}
-            />)}
             <DoctorIdRegisterDialog
               open={openDoctorIdRequest}
               onCancel={() => toggleDoctorIdRequest(false)}
-              onValidate={onValidateDoctorId}
+              onSubmit={onValidateDoctorId}
             />
           </>
         )}
