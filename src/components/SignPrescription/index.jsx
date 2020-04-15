@@ -13,6 +13,7 @@ export default ({ prescription, onSigned, doneAuth = false }) => {
     "email",
     "id",
     "blockchainid",
+    "country",
     `ref=${JSON.stringify({
       doctorId: getDoctorId(),
       prescriptionHash: prescription.hash,
@@ -21,16 +22,6 @@ export default ({ prescription, onSigned, doneAuth = false }) => {
       doctorCompanyId: prescription.doctorCompanyId,
     })}`,
   ];
-
-  const useStyles = makeStyles((theme) => ({
-    prescriptionTitle: {
-      fontSize: 20,
-      color: '#00767A',
-      fontWeight: 900,
-      textAlign: 'center',
-      marginBottom: 40
-    },
-  }));
 
   return (
     <>
