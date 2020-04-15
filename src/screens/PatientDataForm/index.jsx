@@ -7,7 +7,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Alert from "@material-ui/lab/Alert";
 import DoctorIdRegisterDialog from "../../components/DoctorIdRegister";
-import { getDoctorId } from "../../helpers/storage";
+import { getDoctorId, setDoctorId } from "../../helpers/storage";
 import SignPrescription from "../../components/SignPrescription";
 import PrescriptionForm from "../../components/PrescriptionForm";
 import { createPrescription } from "../../data/prescriptions";
@@ -17,7 +17,6 @@ import { toBase64 } from "../../helpers";
 import sha256 from "js-sha256";
 import shippingPackage from "./../../assets/shipping-package.svg";
 import { validateDoctorId } from "../../data/doctors";
-import { setDoctorId } from "../../helpers/storage";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -39,14 +38,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 40,
   },
   alerts: {
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 }));
 
 export default () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(null);
-  const [openDoctorIdRequest, toggleDoctorIdRequest] = useState(false);
+  const [openDoctorIdRequest, toggleDoctorIdRequest] = useState(true);
   const [startSignProcess, handleSignProcess] = useState(false);
   const [prescription, setPrescription] = useState(false);
   const [prescriptionFile, setPrescriptionFile] = useState(false);
@@ -55,10 +54,10 @@ export default () => {
   const [uploadForm, setUploadForm] = useState(false);
   const user = useUser();
 
-  const onValidateDoctorId = (doctorId) => {
+  const onValidateDoctorId = (documentId, federalCode) => {
     setPrescription({
       ...prescription,
-      doctorId,
+      doctorId: `${documentId}-${federalCode}`,
     });
     setUploadForm(true);
     toggleDoctorIdRequest(false);
@@ -82,14 +81,18 @@ export default () => {
     }
   };
 
-  const validateDoctor = async (doctor) => {
-    return validateDoctorId(prescription.doctorId, doctor.name, doctor.country);
+  const validateDoctor = async (blockchainUser) => {
+    return validateDoctorId(
+      prescription.doctorId,
+      blockchainUser.name,
+      blockchainUser.country
+    );
   };
 
-  const onPrescriptionSigned = async (doctor) => {
+  const onPrescriptionSigned = async (blockchainUser) => {
     setLoading(true);
     try {
-      await validateDoctor(doctor);
+      await validateDoctor(blockchainUser);
       setDoctorId(prescription.doctorId);
     } catch (err) {
       setCreationResponse("doctor-invalid");
@@ -98,7 +101,7 @@ export default () => {
     }
     const data = {
       ...prescription,
-      doctor: JSON.stringify(doctor),
+      doctor: JSON.stringify(blockchainUser),
       expirationDate: moment(prescription.expirationDate).format(
         "YYYY-MM-DD HH:mm:ss"
       ),
