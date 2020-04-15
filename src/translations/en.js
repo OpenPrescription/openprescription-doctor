@@ -36,5 +36,6 @@ export default {
   homeScreenButton: 'Start prescription',
   prescriptionSent: 'Thank you, the prescription was sent!',
   prescriptionUploaded: 'Prescription Uploaded!',
-  validateIdentity: 'SUBMIT AND VALIDATE MY IDENTITY'
+  validateIdentity: 'SUBMIT AND VALIDATE MY IDENTITY',
+  doctorInvalidErrorMessage: 'We couldn\'t validade doctor ID, please contact us support+op@originalmy.com.'
 };
