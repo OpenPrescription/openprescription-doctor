@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 
 import doctor from './../../assets/doctor-man.svg';
 import unlock from './../../assets/unlock.svg';
+import { useUser } from "../../contexts/User";
 
 export default () => {
 
@@ -124,6 +125,13 @@ export default () => {
     unlockStyle,
     footerBar
   } = useStyles();
+  const user = useUser();
+  const redirectUserToPath = () => {
+    if(!user)
+      history.push('/login')
+    else
+      history.push('/patient-data');
+  }
 
   return (
     <Container className={container}>
@@ -134,7 +142,7 @@ export default () => {
         <Typography variant="body1" className={text}>
           {t('homeScreenText')}
         </Typography>
-        <Button type="submit" variant="contained" color="primary" className={button} onClick={() => history.push('/patient-data')}>
+        <Button type="submit" variant="contained" color="primary" className={button} onClick={() => redirectUserToPath()}>
           {t('homeScreenButton')}
         </Button>
         <img
