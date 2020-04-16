@@ -39,5 +39,8 @@ export default {
   validateIdentity: 'SUBMIT AND VALIDATE MY IDENTITY',
   doctorInvalidErrorMessage: 'We couldn\'t validade doctor ID, please contact us support+op@originalmy.com.',
   doctorFederalCode: 'State',
-  justLettersAllowed: 'Use only letters'
+  justLettersAllowed: 'Use only letters',
+  companyIdOrDocumentId: 'Company ID Or Document ID',
+  companyNameOrDoctorName: 'Company or user name',
+  companyFormTitle: "Fill in the fields below to start the prescription:"
 };

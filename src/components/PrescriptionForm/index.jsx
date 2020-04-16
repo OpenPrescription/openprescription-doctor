@@ -15,6 +15,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles((theme) => ({
   formContent: {
+    maxWidth: 350,
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(4, 0, 6),
   },

@@ -46,5 +46,8 @@ export default {
   fieldRequired: 'Campo obrigatório',
   doctorInvalidErrorMessage: 'Não conseguimos validar seu CRM, por favor entre em support+op@originalmy.com.',
   doctorFederalCode: 'UF',
-  justLettersAllowed: 'Use apenas letras'
+  justLettersAllowed: 'Use apenas letras',
+  companyIdOrDocumentId: 'CNPJ/CPF',
+  companyNameOrDoctorName: 'Nome da empresa ou médico',
+  companyFormTitle: "Preencha os campos abaixo para iniciar a prescrição:"
 };
