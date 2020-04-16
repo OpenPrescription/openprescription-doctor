@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default () => {
   const classes = useStyles();
+  const { i18n } = useTranslation();
   const [loading, setLoading] = useState(null);
   const [openDoctorIdRequest, toggleDoctorIdRequest] = useState(false);
   const [startSignProcess, handleSignProcess] = useState(false);
@@ -55,6 +56,7 @@ export default () => {
   const user = useUser();
 
   const onValidateDoctorId = (documentId, federalCode) => {
+    setDoctorId(`${documentId}-${federalCode}`);
     setPrescription({
       ...prescription,
       doctorId: `${documentId}-${federalCode}`,
@@ -71,6 +73,7 @@ export default () => {
         id: user.companyId,
         name: user.companyName,
       };
+      data.lang = i18n.language.split('-')[0];
       await createPrescription(data);
       window.scrollTo(0, 0);
       setCreationResponse("success");
@@ -95,6 +98,7 @@ export default () => {
       await validateDoctor(blockchainUser);
       setDoctorId(prescription.doctorId);
     } catch (err) {
+      setDoctorId(null);
       setCreationResponse("doctor-invalid");
       setLoading(false);
       return;
