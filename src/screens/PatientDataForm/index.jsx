@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 export default () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(null);
-  const [openDoctorIdRequest, toggleDoctorIdRequest] = useState(true);
+  const [openDoctorIdRequest, toggleDoctorIdRequest] = useState(false);
   const [startSignProcess, handleSignProcess] = useState(false);
   const [prescription, setPrescription] = useState(false);
   const [prescriptionFile, setPrescriptionFile] = useState(false);
