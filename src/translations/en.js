@@ -42,5 +42,8 @@ export default {
   justLettersAllowed: 'Use only letters',
   companyIdOrDocumentId: 'Company ID Or Document ID',
   companyNameOrDoctorName: 'Company or user name',
-  companyFormTitle: "Fill in the fields below to start the prescription:"
+  companyFormTitle: "Fill in the fields below to start the prescription:",
+  loadingQRCode: "Loading QR code...",
+  prescriptionSigned: "Prescription signed.",
+  clickToGenerateNewQRCode: "Click here to reload QR code"
 };
