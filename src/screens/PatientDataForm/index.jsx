@@ -46,13 +46,11 @@ export default () => {
   const classes = useStyles();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(null);
+  const [prescriptionStep, setPrescriptionStep] = useState("creation");
   const [openDoctorIdRequest, toggleDoctorIdRequest] = useState(false);
-  const [startSignProcess, handleSignProcess] = useState(false);
   const [prescription, setPrescription] = useState(false);
   const [prescriptionFile, setPrescriptionFile] = useState(false);
   const [creationResponse, setCreationResponse] = useState("");
-
-  const [uploadForm, setUploadForm] = useState(false);
   const user = useUser();
 
   const onValidateDoctorId = (documentId, federalCode) => {
@@ -61,8 +59,7 @@ export default () => {
       ...prescription,
       doctorId: `${documentId}-${federalCode}`,
     });
-    setUploadForm(true);
-    toggleDoctorIdRequest(false);
+    setPrescriptionStep("upload");
   };
 
   const sendPrescription = async (data) => {
@@ -73,15 +70,17 @@ export default () => {
         id: user.companyId,
         name: user.companyName,
       };
-      data.lang = i18n.language.split('-')[0];
+      data.lang = i18n.language.split("-")[0];
       await createPrescription(data);
-      window.scrollTo(0, 0);
       setCreationResponse("success");
+      setPrescriptionStep("final-success");
     } catch (error) {
-      window.scrollTo(0, 0);
       setCreationResponse("error");
+      setPrescriptionFile(null);
+      setPrescriptionStep("upload");
       console.error(error);
     }
+    window.scrollTo(0, 0);
   };
 
   const validateDoctor = async (blockchainUser) => {
@@ -94,24 +93,25 @@ export default () => {
 
   const onPrescriptionSigned = async (blockchainUser) => {
     setLoading(true);
+    let doctorValidations;
     try {
-      await validateDoctor(blockchainUser);
-      setDoctorId(prescription.doctorId);
+      const response = await validateDoctor(blockchainUser);
+      const validator = response.data.data;
+      doctorValidations = validator.validations;
     } catch (err) {
-      setDoctorId(null);
       setCreationResponse("doctor-invalid");
+      setPrescriptionStep("doctorid");
       setLoading(false);
       return;
     }
-    const data = {
+    await sendPrescription({
       ...prescription,
       doctor: JSON.stringify(blockchainUser),
+      validations: doctorValidations,
       expirationDate: moment(prescription.expirationDate).format(
         "YYYY-MM-DD HH:mm:ss"
       ),
-    };
-    await sendPrescription(data);
-    handleSignProcess(false);
+    });
     setLoading(false);
   };
 
@@ -119,11 +119,10 @@ export default () => {
     const doctorId = getDoctorId();
     data.doctorId = doctorId;
     setPrescription(data);
-    if (!doctorId) {
-      return toggleDoctorIdRequest(true);
+    if (!doctorId || doctorId === "undefined" || doctorId === "null") {
+      return setPrescriptionStep("doctorid");
     }
-    setUploadForm(true);
-    setPrescription(data);
+    setPrescriptionStep("upload");
   };
 
   const toSha256 = (file) =>
@@ -136,6 +135,7 @@ export default () => {
 
   const onUploadPrescription = async (files) => {
     setLoading(true);
+    setCreationResponse(null);
     setPrescriptionFile(files[0]);
     const hash = await toSha256(files[0]);
     setPrescription({
@@ -147,7 +147,8 @@ export default () => {
   };
 
   const onClickPrescription = () => {
-    handleSignProcess(true);
+    setCreationResponse(null);
+    setPrescriptionStep("sign");
   };
 
   return (
@@ -165,62 +166,57 @@ export default () => {
             </Trans>
           </Alert>
         )}
-        {creationResponse == "doctor-invalid" && (
-          <Alert severity="error" className={classes.alerts}>
-            <Trans i18nKey="doctorInvalidErrorMessage">
-              We can validade doctor ID, please contact us.
-            </Trans>
-          </Alert>
+
+        {loading && (
+          <Backdrop className={classes.backdrop} open={loading}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
         )}
-        {!startSignProcess && (
-          <>
-            {loading && (
-              <Backdrop className={classes.backdrop} open={loading}>
-                <CircularProgress color="inherit" />
-              </Backdrop>
-            )}
-            {creationResponse === "success" && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  minHeight: "600px",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  variant="body2"
-                  component="p"
-                  className={classes.prescriptionTitle}
-                >
-                  <Trans i18nKey="prescriptionSent">
-                    Thank you, your prescription was sent!
-                  </Trans>
-                </Typography>
-                <img src={shippingPackage} />
-              </div>
-            )}
-            {creationResponse === "" && (
-              <PrescriptionForm
-                file={prescriptionFile}
-                onClickPrescription={onClickPrescription}
-                onSubmit={onSubmitPrescription}
-                uploadForm={uploadForm}
-                onUploadPrescription={onUploadPrescription}
-              />
-            )}
-            <DoctorIdRegisterDialog
-              open={openDoctorIdRequest}
-              onCancel={() => toggleDoctorIdRequest(false)}
-              onSubmit={onValidateDoctorId}
-            />
-          </>
+
+        {(prescriptionStep === "creation" || prescriptionStep === "upload") && (
+          <PrescriptionForm
+            file={prescriptionFile}
+            onClickPrescription={onClickPrescription}
+            onSubmit={onSubmitPrescription}
+            uploadForm={prescriptionStep === "upload"}
+            onUploadPrescription={onUploadPrescription}
+          />
         )}
-        {startSignProcess && (
+
+        {prescriptionStep === "sign" && (
           <SignPrescription
             prescription={prescription}
             onSigned={onPrescriptionSigned}
           />
+        )}
+
+        <DoctorIdRegisterDialog
+          open={prescriptionStep == "doctorid"}
+          onCancel={() => toggleDoctorIdRequest(false)}
+          onSubmit={onValidateDoctorId}
+          validationError={creationResponse == "doctor-invalid"}
+        />
+
+        {prescriptionStep === "final-success" && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "600px",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              variant="body2"
+              component="p"
+              className={classes.prescriptionTitle}
+            >
+              <Trans i18nKey="prescriptionSent">
+                Thank you, your prescription was sent!
+              </Trans>
+            </Typography>
+            <img src={shippingPackage} />
+          </div>
         )}
       </Container>
     </div>

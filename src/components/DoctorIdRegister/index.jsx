@@ -10,8 +10,9 @@ import { Trans, useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import { Grid } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
-export default ({ open, onCancel, onSubmit }) => {
+export default ({ open, validationError = false, onCancel, onSubmit }) => {
   const { t } = useTranslation();
   const { register, handleSubmit, watch, errors } = useForm();
 
@@ -35,6 +36,15 @@ export default ({ open, onCancel, onSubmit }) => {
             </Trans>
           </DialogContentText>
           <Grid container spacing={2}>
+            <Grid item md={12} sm={12} xs={12}>
+              {validationError && (
+                <Alert severity="error">
+                  <Trans i18nKey="doctorInvalidErrorMessage">
+                    We can validade doctor ID, please contact us.
+                  </Trans>
+                </Alert>
+              )}
+            </Grid>
             <Grid item md={9} xs={12}>
               <TextField
                 autoFocus
