@@ -49,5 +49,8 @@ export default {
   justLettersAllowed: 'Use apenas letras',
   companyIdOrDocumentId: 'CNPJ/CPF',
   companyNameOrDoctorName: 'Nome da empresa ou médico',
-  companyFormTitle: "Preencha os campos abaixo para iniciar a prescrição:"
+  companyFormTitle: "Preencha os campos abaixo para iniciar a prescrição:",
+  loadingQRCode: "Carregando QR code...",
+  prescriptionSigned: "Prescrição assinada.",
+  clickToGenerateNewQRCode: "Clique aqui para gerar um novo QR code"
 };
