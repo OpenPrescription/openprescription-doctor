@@ -11,6 +11,7 @@ export const getAccessToken = () => {
 };
 
 export const setDoctorId = (doctorId) => {
+  if (doctorId == null) return localStorage.removeItem(MEDICAL_ID_KEY);
   localStorage.setItem(MEDICAL_ID_KEY, doctorId);
 };
 
