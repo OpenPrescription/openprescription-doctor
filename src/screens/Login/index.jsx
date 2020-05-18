@@ -9,6 +9,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import { Trans, useTranslation } from "react-i18next";
 import { useAuth } from "../../contexts/Auth";
 import { Typography } from "@material-ui/core";
+import { HAS_BLOCKCHAINID_STORAGE_KEY } from "../../constants";
 // JAVASCRIPT
 // -------------------------------------------------------------------
 
@@ -16,7 +17,14 @@ export default () => {
   const [loggedIn, setLoggedIn] = useState(false);
   let history = useHistory();
   let location = useLocation();
-  let { from } = location.state || { from: { pathname: "/patient-data" } };
+  const alreadyAskForBlockchainId = localStorage.getItem(
+    HAS_BLOCKCHAINID_STORAGE_KEY
+  );
+  let { from } = location.state || {
+    from: {
+      pathname: alreadyAskForBlockchainId ? "/patient-data" : "blockchain-id",
+    },
+  };
   const { login } = useAuth();
 
   const onSubmit = ({ companyId, companyName }) => {
@@ -59,7 +67,9 @@ export default () => {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className={formContainer}>
           <Typography variant="subtitle1" style={{ marginBottom: 20 }}>
-            <Trans i18nKey="companyFormTitle">Preencha os campos abaixo para iniciar a prescrição:</Trans>
+            <Trans i18nKey="companyFormTitle">
+              Preencha os campos abaixo para iniciar a prescrição:
+            </Trans>
           </Typography>
           <TextField
             autoFocus
