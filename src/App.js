@@ -7,6 +7,7 @@ import {
   NoMatch
 } from "./screens";
 import PrivateRoute from "./components/PrivateRoute";
+import AskForBlockchainID from "./screens/AskForBlockchainID";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path="/" exact>
           <Home />
+        </Route>
+        <Route path="/blockchain-id" exact>
+          <AskForBlockchainID />
         </Route>
         <PrivateRoute path="/patient-data" exact>
           <PatientDataForm />
