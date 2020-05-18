@@ -52,5 +52,10 @@ export default {
   companyFormTitle: "Preencha os campos abaixo para iniciar a prescrição:",
   loadingQRCode: "Carregando QR code...",
   prescriptionSigned: "Prescrição assinada.",
-  clickToGenerateNewQRCode: "Clique aqui para gerar um novo QR code"
+  clickToGenerateNewQRCode: "Clique aqui para gerar um novo QR code",
+  blockchainidTitle: "Para assinar a prescrição médica, você precisa criar uma Blockchain ID pelo aplicativo da OriginalMy",
+  blockchainidCreateButton: "Criar Blockchain ID",
+  blockchainidReadyHasButton: "Já tenho a Blockchain ID",
+  blockchainidAvailableInStores: "Disponível na Google Play e App Store.",
+  blockchainidContinue: "Continar",
 };

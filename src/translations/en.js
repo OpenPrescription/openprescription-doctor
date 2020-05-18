@@ -45,5 +45,10 @@ export default {
   companyFormTitle: "Fill in the fields below to start the prescription:",
   loadingQRCode: "Loading QR code...",
   prescriptionSigned: "Prescription signed.",
-  clickToGenerateNewQRCode: "Click here to reload QR code"
+  clickToGenerateNewQRCode: "Click here to reload QR code",
+  blockchainidTitle: "To sign the prescription, you need to create a Blockchain ID using the OriginalMy app",
+  blockchainidCreateButton: "Create Blockchain ID",
+  blockchainidReadyHasButton: "I already have the Blockchain ID",
+  blockchainidAvailableInStores: "Available on Google Play and App Store.",
+  blockchainidContinue: "Continue",
 };
