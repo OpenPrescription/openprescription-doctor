@@ -5,6 +5,7 @@ import playStore from "../../assets/play-store.svg";
 import { Container, Typography, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { HAS_BLOCKCHAINID_STORAGE_KEY } from "../../constants";
+import { Trans } from "react-i18next";
 
 class AskForBlockchainID extends Component {
   state = {
@@ -25,8 +26,10 @@ class AskForBlockchainID extends Component {
               variant="body1"
               style={{ marginTop: 40, marginBottom: 40, textAlign: "center" }}
             >
-              Para assinar a prescrição médica, você precisa criar uma
-              Blockchain ID pelo aplicativo da OriginalMy
+              <Trans i18nKey="blockchainidTitle">
+                Para assinar a prescrição médica, você precisa criar uma
+                Blockchain ID pelo aplicativo da OriginalMy
+              </Trans>
             </Typography>
 
             <Button
@@ -38,7 +41,7 @@ class AskForBlockchainID extends Component {
                 this.setState({ showAppDownload: true });
               }}
             >
-              Criar Blockchain ID
+              <Trans i18nKey="blockchainidCreateButton">Criar Blockchain ID</Trans>
             </Button>
             <Link to="/patient-data" style={{ textDecoration: "none" }}>
               <Button
@@ -50,7 +53,7 @@ class AskForBlockchainID extends Component {
                   localStorage.setItem(HAS_BLOCKCHAINID_STORAGE_KEY, true);
                 }}
               >
-                Já tenho a Blockchain ID
+                <Trans i18nKey="blockchainidReadyHasButton">Já tenho a Blockchain ID</Trans>
               </Button>
             </Link>
           </>
@@ -68,8 +71,10 @@ class AskForBlockchainID extends Component {
               variant="body1"
               style={{ marginTop: 40, marginBottom: 40, textAlign: "justify" }}
             >
-              Para assinar a prescrição médica, você precisa criar uma
-              Blockchain ID pelo aplicativo da OriginalMy
+              <Trans i18nKey="blockchainidTitle">
+                Para assinar a prescrição médica, você precisa criar uma
+                Blockchain ID pelo aplicativo da OriginalMy
+              </Trans>
             </Typography>
             <img
               src="http://chart.apis.google.com/chart?cht=qr&amp;chs=300x300&amp;chl=https://originalmy.com/app"
@@ -77,7 +82,7 @@ class AskForBlockchainID extends Component {
               style={{ display: "block", margin: "auto" }}
             />
             <p data-i18n="availablestores" style={{ textAlign: "center" }}>
-              Disponível na Google Play e App Store.
+              <Trans i18nKey="blockchainidAvailableInStores">Disponível na Google Play e App Store.</Trans>
             </p>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <a
@@ -101,7 +106,7 @@ class AskForBlockchainID extends Component {
                 style={{ margin: "auto", display: "block", marginTop: 40 }}
                 onClick={() => this.onContinue()}
               >
-                Continuar
+                <Trans i18nKey="blockchainidContinue">Continuar</Trans>
               </Button>
             </Link>
           </div>
