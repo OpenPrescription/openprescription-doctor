@@ -12,5 +12,5 @@ export const fetchNonce = (infos) =>
   axios.get(
     `/api/originalmy-proxy/login/nonce/${
       process.env.REACT_APP_ORIGINALMY_CLIENT_ID
-    }/${process.env.REACT_APP_ORIGINALMY_ENV}/${infos.join(",")}`
+    }/${process.env.REACT_APP_ORIGINALMY_ENV}/${infos.join(",")}?timeout=${process.env.REACT_APP_QRCODE_TIMEOUT}`
   );
