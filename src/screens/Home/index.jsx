@@ -157,7 +157,6 @@ export default () => {
         <img src={doctor} class={doctorStyle} />
         <img src={unlock} class={unlockStyle} />
       </div>
-      <div className={footerBar}></div>
     </Container>
   );
 };

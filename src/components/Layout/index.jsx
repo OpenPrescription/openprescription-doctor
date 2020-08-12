@@ -1,6 +1,7 @@
 import React from "react";
 import { useUser } from "../../contexts/User";
 import Header from "../Header";
+import Footer from "../Footer";
 import GuestHeader from "../GuestHeader";
 
 export default ({ children }) => {
@@ -8,7 +9,8 @@ export default ({ children }) => {
   return (
     <div className="op-container">
       {user ? <Header /> : <GuestHeader />}
-      <main>{children}</main>
+      <main style={{ minHeight: 'calc(100vh - 140px)', background: '#FFF'}}>{children}</main>
+      <Footer/>
     </div>
   );
 };

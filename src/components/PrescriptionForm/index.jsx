@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   formContent: {
     maxWidth: 350,
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(4, 0, 6),
+    //padding: theme.spacing(4, 0, 6),
   },
   prescriptionInput: {
     display: "none",
@@ -34,11 +34,15 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(0, 0, 2, 0),
+    width: '100%',
     display: "block",
     "& input": {
-      width: 350,
+      width: '100%',
     },
   },
+  textField: {
+    width: '100%'
+  }
 }));
 
 export default ({
@@ -167,6 +171,7 @@ export default ({
               autoComplete="pname"
               inputRef={register({ required: true })}
               error={Boolean(errors.patientName)}
+              className={classes.textField}
             />
             {errors.patientName && (
               <FormHelperText error={true}>
@@ -183,6 +188,7 @@ export default ({
               name="patientEmail"
               label={t("patientEmailLabel")}
               autoComplete="pemail"
+              className={classes.textField}
               inputRef={register({
                 required: true,
                 pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -213,6 +219,7 @@ export default ({
               autoComplete="pdocumentid"
               inputRef={register({ required: true })}
               error={Boolean(errors.patientId)}
+              className={classes.textField}
             />
             {errors.patientId && (
               <FormHelperText error={true}>
@@ -234,6 +241,7 @@ export default ({
               inputProps={{ min: 1 }}
               inputRef={register({ required: true })}
               error={Boolean(errors.maxUses)}
+              className={classes.textField}
             />
             {errors.maxUses && (
               <FormHelperText error={true}>
@@ -285,7 +293,7 @@ export default ({
               type="submit"
               variant="contained"
               color="primary"
-              style={{ width: "350px" }}
+              style={{ width: "100%", maxWidth: 350 }}
             >
               <Trans i18nKey="submitButtonLabel">Next</Trans>
             </Button>

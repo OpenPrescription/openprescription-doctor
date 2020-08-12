@@ -17,6 +17,7 @@ import { toBase64 } from "../../helpers";
 import sha256 from "js-sha256";
 import shippingPackage from "./../../assets/shipping-package.svg";
 import { validateDoctorId } from "../../data/doctors";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
+export default (props) => {
   const classes = useStyles();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(null);
@@ -151,6 +152,12 @@ export default () => {
     setPrescriptionStep("sign");
   };
 
+  const onRestart = () => {
+    setCreationResponse(null);
+    setPrescriptionFile(null);
+    setPrescriptionStep("creation");
+  };
+
   return (
     <div className={classes.heroContent}>
       <Container>
@@ -216,6 +223,17 @@ export default () => {
               </Trans>
             </Typography>
             <img src={shippingPackage} />
+            <Button
+              variant="contained"
+              size="large"
+              color="primary"
+              style={{ margin: "auto", display: "block", marginTop: 40 }}
+              onClick={() => onRestart()}
+            >
+              <Trans i18nKey="sendNewPrescriptionButton">
+                Send new prescription
+              </Trans>
+            </Button>
           </div>
         )}
       </Container>
