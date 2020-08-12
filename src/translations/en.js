@@ -51,4 +51,5 @@ export default {
   blockchainidReadyHasButton: "I already have the Blockchain ID",
   blockchainidAvailableInStores: "Available on Google Play and App Store.",
   blockchainidContinue: "Continue",
+  sendNewPrescriptionButton: "Send new prescription"
 };

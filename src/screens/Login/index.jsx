@@ -36,7 +36,7 @@ export default () => {
     container: {
       padding: theme.spacing(8, 3, 3, 3),
       //backgroundColor: theme.palette.background.paper,
-      height: "calc(100vh - 64px)",
+      //height: "calc(100vh - 64px)",
     },
     icon: {
       display: "block",
@@ -53,6 +53,7 @@ export default () => {
     formContainer: {
       display: "block",
       maxWidth: 350,
+      padding: 0
     },
   }));
 

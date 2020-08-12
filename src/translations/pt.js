@@ -58,4 +58,5 @@ export default {
   blockchainidReadyHasButton: "Já tenho a Blockchain ID",
   blockchainidAvailableInStores: "Disponível na Google Play e App Store.",
   blockchainidContinue: "Continar",
+  sendNewPrescriptionButton: "Enviar nova receita"
 };
