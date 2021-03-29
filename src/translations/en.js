@@ -51,5 +51,6 @@ export default {
   blockchainidReadyHasButton: "I already have the Blockchain ID",
   blockchainidAvailableInStores: "Available on Google Play and App Store.",
   blockchainidContinue: "Continue",
-  sendNewPrescriptionButton: "Send new prescription"
+  sendNewPrescriptionButton: "Send new prescription",
+  apoiaseText: "Be our supporter in Apoia-se and help Open Prescription, which helps thousands of patients and doctors in Brazil and worldwide, to remain free and available to those in need. Click to support."
 };

@@ -9,7 +9,7 @@ export default ({ children }) => {
   return (
     <div className="op-container">
       {user ? <Header /> : <GuestHeader />}
-      <main style={{ minHeight: 'calc(100vh - 140px)', background: '#FFF'}}>{children}</main>
+      <main style={{ minHeight: 'calc(100vh - 210px)', background: '#FFF'}}>{children}</main>
       <Footer/>
     </div>
   );

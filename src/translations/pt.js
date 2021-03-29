@@ -58,5 +58,6 @@ export default {
   blockchainidReadyHasButton: "Já tenho a Blockchain ID",
   blockchainidAvailableInStores: "Disponível na Google Play e App Store.",
   blockchainidContinue: "Continar",
-  sendNewPrescriptionButton: "Enviar nova receita"
+  sendNewPrescriptionButton: "Enviar nova receita",
+  apoiaseText: "Seja nosso apoiador no Apoia-se e ajude o Open Prescription, que ajuda milhares de pacientes e médicos no Brasil e no mundo, a manter-se gratuito e disponível para quem precisa. Clique para apoiar."
 };

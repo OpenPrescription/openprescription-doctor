@@ -222,7 +222,7 @@ export default (props) => {
                 Thank you, your prescription was sent!
               </Trans>
             </Typography>
-            <img src={shippingPackage} />
+            <img src={shippingPackage}  style={{ width: 200, height: 400, display: 'block', margin: 'auto' }}/>
             <Button
               variant="contained"
               size="large"
