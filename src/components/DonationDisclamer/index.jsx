@@ -8,14 +8,22 @@ export const DonationDisclamer = () => {
       <Alert
         severity="warning"
         action={
-          <Button color="secondary" variant="contained" component="button">
+          <Button
+            color="secondary"
+            variant="contained"
+            component="button"
+            onClick={() => {
+              window.open("https://apoia.se/open-prescription", "_blank");
+            }}
+          >
             Faça uma doação
           </Button>
         }
       >
         <AlertTitle>Você gosta dessa plataforma?</AlertTitle>{" "}
         <Typography variant="body1">
-          Ela tem ajudado a salvar a vida de milhares de pessoas principalmente neste momento de pandemia. Precisamos agora de sua ajuda para mantê-la funcionando
+          Ela tem ajudado a salvar a vida de milhares de pessoas, mantendo-as
+          seguras em casa. Precisamos agora de sua ajuda.
         </Typography>
       </Alert>
     </Paper>
