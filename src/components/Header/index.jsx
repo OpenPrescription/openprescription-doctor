@@ -9,12 +9,14 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useAuth } from "../../contexts/Auth";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { Link as RouterLink } from "react-router-dom";
 
 import logo from "../../assets/logo_prescription-03.png";
 import { DonationDisclamer } from "../DonationDisclamer";
+import { Link } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -61,7 +63,20 @@ export default () => {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-          <img src={logo} style={{ width: 200 }} />
+          <nav style={{ display: "flex", alignItems: "center" }}>
+            <Link component={RouterLink} to="/">
+              <img src={logo} style={{ width: 200 }} alt="Open prescrition" />
+            </Link>
+            <Link
+              component={RouterLink}
+              to="/supporters"
+              color="inherit"
+              variant="body1"
+              style={{ marginLeft: 30 }}
+            >
+              <Trans i18nKey="ourSupporters">Nossos apoiadores</Trans>
+            </Link>
+          </nav>
 
           <div>
             <Button

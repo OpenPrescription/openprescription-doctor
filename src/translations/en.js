@@ -52,5 +52,10 @@ export default {
   blockchainidAvailableInStores: "Available on Google Play and App Store.",
   blockchainidContinue: "Continue",
   sendNewPrescriptionButton: "Send new prescription",
-  apoiaseText: "Be our supporter in Apoia-se and help Open Prescription, which helps thousands of patients and doctors in Brazil and worldwide, to remain free and available to those in need. Click to support."
+  apoiaseText: "Be our supporter in Apoia-se and help Open Prescription, which helps thousands of patients and doctors in Brazil and worldwide, to remain free and available to those in need. Click to support.",
+  supportersTitle: "Special thanks to the supporters:",
+  donateDisclamerButton: "Donate",
+  donateDisclamerTitle: "Do you like this platform?",
+  donateDisclamerMessage: "It has helped to save the lives of thousands of people by keeping them safe at home. We now need help from her.",
+  ourSupporters: "Our supporters"
 };

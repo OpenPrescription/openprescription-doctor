@@ -11,9 +11,7 @@ import "./helpers/polyfill";
 ReactDOM.render(
   <React.StrictMode>
     <AppProviders>
-      <Layout>
-        <App />
-      </Layout>
+      <App />
     </AppProviders>
   </React.StrictMode>,
   document.getElementById("root")

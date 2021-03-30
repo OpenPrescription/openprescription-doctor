@@ -1,6 +1,7 @@
 import { Button, Paper, Typography } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import React from "react";
+import { Trans } from "react-i18next";
 
 export const DonationDisclamer = () => {
   return (
@@ -16,14 +17,20 @@ export const DonationDisclamer = () => {
               window.open("https://apoia.se/open-prescription", "_blank");
             }}
           >
-            Faça uma doação
+            <Trans i18nKey="donateDisclamerButton">Faça uma doação</Trans>
           </Button>
         }
       >
-        <AlertTitle>Você gosta dessa plataforma?</AlertTitle>{" "}
+        <AlertTitle>
+          <Trans i18nKey="donateDisclamerTitle">
+            Você gosta dessa plataforma?
+          </Trans>
+        </AlertTitle>{" "}
         <Typography variant="body1">
-          Ela tem ajudado a salvar a vida de milhares de pessoas, mantendo-as
-          seguras em casa. Precisamos agora de sua ajuda.
+          <Trans i18nKey="donateDisclamerMessage">
+            Ela tem ajudado a salvar a vida de milhares de pessoas, mantendo-as
+            seguras em casa. Precisamos agora de sua ajuda.
+          </Trans>
         </Typography>
       </Alert>
     </Paper>

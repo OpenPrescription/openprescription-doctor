@@ -59,5 +59,10 @@ export default {
   blockchainidAvailableInStores: "Disponível na Google Play e App Store.",
   blockchainidContinue: "Continar",
   sendNewPrescriptionButton: "Enviar nova receita",
-  apoiaseText: "Seja nosso apoiador no Apoia-se e ajude o Open Prescription, que ajuda milhares de pacientes e médicos no Brasil e no mundo, a manter-se gratuito e disponível para quem precisa. Clique para apoiar."
+  apoiaseText: "Seja nosso apoiador no Apoia-se e ajude o Open Prescription, que ajuda milhares de pacientes e médicos no Brasil e no mundo, a manter-se gratuito e disponível para quem precisa. Clique para apoiar.",
+  supportersTitle: "Nosso agradecimento especial aos apoiadores:",
+  donateDisclamerButton: "Faça uma doação",
+  donateDisclamerTitle: "Você gosta dessa plataforma?",
+  donateDisclamerMessage: "Ela tem ajudado a salvar a vida de milhares de pessoas, mantendo-as seguras em casa. Precisamos agora de sua ajuda.",
+  ourSupporters: "Nossos apoiadores"
 };
