@@ -6,14 +6,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/Button"
+import MenuItem from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../contexts/Auth";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-import logo from '../../assets/logo_prescription-03.png';
+import logo from "../../assets/logo_prescription-03.png";
+import { DonationDisclamer } from "../DonationDisclamer";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -25,12 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    textTransform: 'uppercase'
+    textTransform: "uppercase",
   },
   menuItemBlock: {
-    display: 'block',
-    width: '100%'
-  }
+    display: "block",
+    width: "100%",
+  },
 }));
 
 export default () => {
@@ -59,28 +60,27 @@ export default () => {
     <header>
       <CssBaseline />
       <AppBar position="relative">
-        <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
-
-          <img src={logo} style={{ width: 200 }}/>
+        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
+          <img src={logo} style={{ width: 200 }} />
 
           <div>
-          <Button
-            color="inherit"
-            aria-controls="language-menu"
-            aria-haspopup="true"
-            onClick={handleSelectLanguage}
-          >
-            {language}
-            <KeyboardArrowDownIcon />
-          </Button>
-          <Button
-            color="inherit"
-            aria-controls="language-menu"
-            aria-haspopup="true"
-            onClick={handleLogout}
-          >
-            <ExitToAppIcon/>
-          </Button>
+            <Button
+              color="inherit"
+              aria-controls="language-menu"
+              aria-haspopup="true"
+              onClick={handleSelectLanguage}
+            >
+              {language}
+              <KeyboardArrowDownIcon />
+            </Button>
+            <Button
+              color="inherit"
+              aria-controls="language-menu"
+              aria-haspopup="true"
+              onClick={handleLogout}
+            >
+              <ExitToAppIcon />
+            </Button>
           </div>
         </Toolbar>
         <Menu
@@ -90,14 +90,21 @@ export default () => {
           onClose={handleClose}
           keepMounted
         >
-          <MenuItem className={classes.menuItemBlock} onClick={(e) => handleSelectLanguage(e, "en")}>
+          <MenuItem
+            className={classes.menuItemBlock}
+            onClick={(e) => handleSelectLanguage(e, "en")}
+          >
             English
           </MenuItem>
-          <MenuItem className={classes.menuItemBlock} onClick={(e) => handleSelectLanguage(e, "pt")}>
+          <MenuItem
+            className={classes.menuItemBlock}
+            onClick={(e) => handleSelectLanguage(e, "pt")}
+          >
             Português
           </MenuItem>
         </Menu>
       </AppBar>
+      <DonationDisclamer />
     </header>
   );
 };

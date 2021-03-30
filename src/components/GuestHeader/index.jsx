@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { useTranslation } from "react-i18next";
 import logo from '../../assets/logo_prescription-03.png';
+import { DonationDisclamer } from "../DonationDisclamer";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -78,6 +79,7 @@ export default () => {
           </MenuItem>
         </Menu>
       </AppBar>
+      <DonationDisclamer/>
     </header>
   );
 };

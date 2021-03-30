@@ -160,7 +160,7 @@ export default (props) => {
 
   return (
     <div className={classes.heroContent}>
-      <Container>
+      <Container maxWidth={false}>
         {loading && (
           <Backdrop className={classes.backdrop} open={loading}>
             <CircularProgress color="inherit" />
